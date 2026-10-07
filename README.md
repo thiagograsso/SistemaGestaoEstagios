@@ -1,7 +1,5 @@
 # Sistema de Gestão de Estágios e Atividades Acadêmicas
 
----
-
 ## 📋 Informações do Projeto
 
 - **Grupo Nº:** 02
@@ -14,11 +12,8 @@
 ## 👥 Integrantes
 
 - Ana Luiza Dias da Rocha
-
 - Carlos Eduardo Lanser
-
 - Marcelo Felipe Momm
-
 - Thiago Grasso
 
 ---
