@@ -32,5 +32,5 @@ A arquitetura de comunicação opera através de uma API RESTful, onde o fluxo d
 
 ## 4. Histórico de Revisões
 | Data | Descrição | Autor(es) |
-|:----:|:---------:|:---------:|
+|:---|:--------|:--------|
 | Hoje | Documentação inicial de arquitetura, tecnologias e fluxo de comunicação. | Equipe 02 |
