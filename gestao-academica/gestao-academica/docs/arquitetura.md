@@ -14,7 +14,7 @@ O sistema foi concebido estruturalmente em camadas, separando claramente a inter
 
 ## 2. Escolhas Tecnológicas e Justificativas
 | Componente | Tecnologia Escolhida | Justificativa |
-|:----------:|:--------------------:|:-------------:|
+|:--------|:---------------|:----------|
 |Front-end |	React	| Permite o desenvolvimento de interfaces web dinâmicas e componentizadas, facilitando a criação de painéis separados para Estudantes, Orientadores e Coordenadores. |
 |Back-end |	Java / Spring Boot | Oferece alta robustez, segurança, padronização corporativa e facilidade na criação de APIs REST robustas para regras de negócio acadêmicas. |
 |Gerenciamento de Build	| Gradle | Automação eficiente de compilação e gestão de dependências do ecossistema Java. |
