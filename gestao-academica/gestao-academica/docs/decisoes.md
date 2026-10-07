@@ -9,8 +9,10 @@ Este documento tem como objetivo registrar as principais decisões técnicas e d
 
 | Data | Decisão | Contexto / Justificativa | Status |
 | :--- | :--- | :--- | :--- |
-| DD/MM/AAAA | Ex: Uso do Gradle como gerenciador de dependências | Padrão adotado pela equipe para estruturar o projeto Java. | **Aprovado** |
-| DD/MM/AAAA | Ex: Adoção do padrão MVC / Arquitetura em camadas | Facilita a separação de responsabilidades (Regra de Negócio, Banco e Interface). | **Aprovado** |
+| 06/10/2026 | Ex: Uso do Gradle como gerenciador de dependências | Padrão adotado pela equipe para estruturar o projeto Java. | **Aprovado** |
+| 06/10/2026 | Ex: Adoção do padrão MVC / Arquitetura em camadas | Facilita a separação de responsabilidades (Regra de Negócio, Banco e Interface). | **Aprovado** |
+| 06/10/2026 | Ex: Uso do MySQL como banco relacional | Integração ótima com Java/Spring-Boot e familiaridade de uso | **Aprovado** |
+| 06/10/2026 | Ex: Uso do React como Frontend e Lovable para protótipo | React permite criar interfaces dinâmicas e componentizadas, Lovable é intuitivo e a opção mais moderna hoje | **Aprovado** |
 
 ---
 
@@ -36,4 +38,4 @@ Este documento tem como objetivo registrar as principais decisões técnicas e d
 
 | Data | Autor(a) | Descrição da Alteração |
 | :--- | :--- | :--- |
-| DD/MM/AAAA | [Nome] | Criação inicial do documento de decisões. |
+| 07/10/2026 | Thiago | Criação inicial do documento de decisões. |
