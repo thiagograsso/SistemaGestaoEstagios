@@ -24,9 +24,9 @@ O sistema foi concebido estruturalmente em camadas, separando claramente a inter
 
 ## 3. Comunicação entre as Camadas (Frontend, Backend e Banco)
 A arquitetura de comunicação opera através de uma API RESTful, onde o fluxo de dados ocorre da seguinte forma:
-**1. Interface de Usuário (React):** O usuário interage com as telas e aciona ações (ex: submeter registros de estágio). O front-end empacota os dados e realiza requisições HTTP (GET, POST, etc.) enviando payloads em formato JSON.
-**2. Camada de Serviço e Regras (Spring Boot):** O back-end recebe as requisições na API, valida as regras de negócio e permissões acadêmicas pertinentes ao ator logado.
-**3. Persistência (MySQL):** O back-end interage com o banco de dados relacional MySQL por meio de mapeamento objeto-relacional (JPA/Hibernate), garantindo a persistência segura e estruturada das informações.
+1. **Interface de Usuário (React):** O usuário interage com as telas e aciona ações (ex: submeter registros de estágio). O front-end empacota os dados e realiza requisições HTTP (GET, POST, etc.) enviando payloads em formato JSON.
+2. **Camada de Serviço e Regras (Spring Boot):** O back-end recebe as requisições na API, valida as regras de negócio e permissões acadêmicas pertinentes ao ator logado.
+3. **Persistência (MySQL):** O back-end interage com o banco de dados relacional MySQL por meio de mapeamento objeto-relacional (JPA/Hibernate), garantindo a persistência segura e estruturada das informações.
 
 ---
 
