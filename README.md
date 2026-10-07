@@ -1,4 +1,6 @@
-Sistema de Gestão de Estágios e Atividades Acadêmicas
+**Sistema de Gestão de Estágios e Atividades Acadêmicas**
+
+---
 
 📋 Informações do Projeto
 
@@ -52,7 +54,8 @@ Validação Final: A coordenação acompanha o status global e homologa a conclu
 
 O diagrama entidade-relacionamento estruturado para suportar o banco de dados da aplicação:
 
-Dica: Insira a imagem do seu DER na pasta do projeto (ex: docs/der.png) e atualize o caminho abaixo.
+[DER.pdf](https://github.com/user-attachments/files/33134521/DER.pdf)
+<img width="1813" height="776" alt="image" src="https://github.com/user-attachments/assets/feaeb70c-433f-4a7a-b1bd-b9fa6397254f" />
 
 🛠️ 5. Tecnologias e Estrutura Atual
 
