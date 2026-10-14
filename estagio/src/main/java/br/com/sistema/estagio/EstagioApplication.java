@@ -1,13 +1,13 @@
-package br.edu.univille.gestao_academica;
+package br.com.sistema.estagio;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GestaoAcademicaApplication {
+public class EstagioApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GestaoAcademicaApplication.class, args);
+		SpringApplication.run(EstagioApplication.class, args);
 	}
 
 }

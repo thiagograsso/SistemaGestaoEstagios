@@ -1,10 +1,10 @@
-package br.edu.univille.gestao_academica;
+package br.com.sistema.estagio;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GestaoAcademicaApplicationTests {
+class EstagioApplicationTests {
 
 	@Test
 	void contextLoads() {
