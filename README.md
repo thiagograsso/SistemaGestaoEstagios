@@ -50,6 +50,7 @@ O objetivo deste projeto é construir um sistema web para registrar e acompanhar
 O diagrama entidade-relacionamento estruturado para suportar o banco de dados da aplicação:
 
 [DER.pdf](https://github.com/user-attachments/files/33134521/DER.pdf)  
+[DER.pdf](https://github.com/thiagograsso/SistemaGestaoEstagios/blob/main/DER.pdf)  
 <img width="1813" height="776" alt="image" src="https://github.com/user-attachments/assets/feaeb70c-433f-4a7a-b1bd-b9fa6397254f" />
 
 ---
