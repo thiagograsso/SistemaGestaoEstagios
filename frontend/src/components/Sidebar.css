@@ -1,0 +1,69 @@
+.sidebar {
+  width: 227px;
+  min-height: 100px;
+  background: #1a3a8f;
+  color: white;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  background: #2f9bff;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-nome {
+  display: block;
+  font-size: 20px;
+}
+
+.logo-sub {
+  display: block;
+  font-size: 10px;
+}
+
+.perfil {
+  align-self: flex-start;
+  margin: 24px 0;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.menu-item {
+  display: block;
+  padding: 10px 14px;
+  margin-bottom: 4px;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.menu-item-ativo {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.sair {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 12px;
+}

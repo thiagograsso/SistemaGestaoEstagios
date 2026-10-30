@@ -1,0 +1,14 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.principal {
+  flex: 1;
+}
+
+.conteudo {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 72px 32px;
+}
