@@ -1,0 +1,61 @@
+.formulario {
+  max-width: 672px;
+}
+
+.campo {
+  display: block;
+  margin-bottom: 18px;
+  font-size: 12px;
+  color: #475569;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
+  font-family: inherit;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.campo textarea {
+  resize: vertical;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 1px;
+}
+
+.botao {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  background: #1d4ed8;
+  color: white;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background: #1e40af;
+}
+
+.alerta-sucesso {
+  margin: 16px 0 0;
+  padding: 12px;
+  border-radius: 6px;
+  background: #cfe6d8;
+  color: #166534;
+  font-size: 14px;
+}
