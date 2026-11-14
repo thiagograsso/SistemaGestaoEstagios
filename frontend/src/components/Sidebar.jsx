@@ -6,7 +6,7 @@ const itensMenu = [
   { id: 'atividades', texto: '📋 Atividades' },
 ]
 
-function Sidebar({ paginaAtual, aoNavegar }) {
+function Sidebar({ paginaAtual, aoNavegar, aoSair }) {
   return (
     <aside className="sidebar">
       <div className="logo-area">
@@ -36,7 +36,16 @@ function Sidebar({ paginaAtual, aoNavegar }) {
         ))}
       </nav>
 
-      <a href="#" className="sair">Sair do sistema</a>
+      <a
+        href="#"
+        className="sair"
+        onClick={(e) => {
+          e.preventDefault()
+          aoSair()
+        }}
+      >
+        Sair do sistema
+      </a>
     </aside>
   )
 }

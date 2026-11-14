@@ -1,0 +1,141 @@
+.login {
+  display: flex;
+  min-height: 100vh;
+}
+
+.login-lado-azul {
+  flex: 0 0 47%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px 56px 24px;
+  background: #1a3a8f;
+  color: white;
+}
+
+.login-etiqueta {
+  font-size: 12px;
+  font-weight: bold;
+  color: #8ec9ff;
+}
+
+.login-titulo {
+  max-width: 520px;
+  margin: 12px 0 20px;
+  font-size: 52px;
+  line-height: 1.1;
+}
+
+.login-descricao {
+  max-width: 440px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.login-rodape {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.login-lado-form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 512px;
+}
+
+.login-icone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 32px;
+  border-radius: 10px;
+  background: #1148b8;
+  font-size: 22px;
+}
+
+.login-form-titulo {
+  margin: 0;
+  font-size: 32px;
+}
+
+.login-form-sub {
+  margin: 6px 0 32px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.login-campo {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.login-campo input {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: white;
+  font-family: inherit;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.login-campo input:focus {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 1px;
+}
+
+.login-botao {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  background: #1148b8;
+  color: white;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-botao:hover {
+  background: #0e3a96;
+}
+
+.login-botao:focus-visible {
+  outline: 2px solid #1d4ed8;
+  outline-offset: 2px;
+}
+
+@media (max-width: 800px) {
+  .login {
+    flex-direction: column;
+  }
+
+  .login-lado-azul {
+    flex: none;
+    gap: 32px;
+    padding: 32px 24px;
+  }
+
+  .login-titulo {
+    font-size: 36px;
+  }
+}
