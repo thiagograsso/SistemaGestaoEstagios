@@ -1,11 +1,11 @@
+package br.com.sistema.estagio.controller;
+
 import br.com.sistema.estagio.model.Estagio;
 import br.com.sistema.estagio.service.EstagioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
-package br.com.sistema.estagio.controller;
 
 
 
@@ -23,7 +23,7 @@ public class EstagioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Estagio> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Estagio> buscarPorId(@PathVariable Integer id) {
         Estagio estagio = estagioService.buscarPorId(id);
         return ResponseEntity.ok(estagio);
     }
@@ -35,13 +35,13 @@ public class EstagioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Estagio> atualizar(@PathVariable Long id, @RequestBody Estagio estagio) {
+    public ResponseEntity<Estagio> atualizar(@PathVariable Integer id, @RequestBody Estagio estagio) {
         Estagio estagioAtualizado = estagioService.atualizar(id, estagio);
         return ResponseEntity.ok(estagioAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         estagioService.deletar(id);
         return ResponseEntity.noContent().build();
     }

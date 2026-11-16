@@ -2,6 +2,8 @@ package br.com.sistema.estagio.service;
 
 import br.com.sistema.estagio.model.Academico;
 import br.com.sistema.estagio.repository.AcademicoRepository;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,34 @@ public class AcademicoService {
 
     public AcademicoService(AcademicoRepository academicoRepository) {
         this.academicoRepository = academicoRepository;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Academico> listarTodos() {
+        return academicoRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public Academico buscarPorId(Integer id) {
+        return academicoRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Acadêmico não encontrado: " + id));
+    }
+
+    @Transactional
+    public Academico criar(Academico academico) {
+        return academicoRepository.save(academico);
+    }
+
+    @Transactional
+    public Academico atualizar(Integer id, Academico academico) {
+        buscarPorId(id);
+        academico.setIdAcademico(id);
+        return academicoRepository.save(academico);
+    }
+
+    @Transactional
+    public void deletar(Integer id) {
+        academicoRepository.deleteById(id);
     }
 
     @Transactional(readOnly = true)

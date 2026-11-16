@@ -1,13 +1,11 @@
+package br.com.sistema.estagio.controller;
+
 import br.com.sistema.estagio.model.RegistroAtividade;
 import br.com.sistema.estagio.service.RegistroAtividadeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
-package br.com.sistema.estagio.controller;
-
-
 
 @RestController
 @RequestMapping("/registro-atividades")
@@ -23,7 +21,7 @@ public class RegistroAtividadeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RegistroAtividade> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<RegistroAtividade> buscarPorId(@PathVariable Integer id) {
         RegistroAtividade registro = registroAtividadeService.buscarPorId(id);
         return ResponseEntity.ok(registro);
     }
@@ -35,13 +33,13 @@ public class RegistroAtividadeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RegistroAtividade> atualizar(@PathVariable Long id, @RequestBody RegistroAtividade registroAtividade) {
+    public ResponseEntity<RegistroAtividade> atualizar(@PathVariable Integer id, @RequestBody RegistroAtividade registroAtividade) {
         RegistroAtividade registroAtualizado = registroAtividadeService.atualizar(id, registroAtividade);
         return ResponseEntity.ok(registroAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
         registroAtividadeService.deletar(id);
         return ResponseEntity.noContent().build();
     }
