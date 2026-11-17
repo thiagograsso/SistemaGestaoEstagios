@@ -1,9 +1,9 @@
 package br.com.sistema.estagio.service;
 
 import br.com.sistema.estagio.model.PeriodoAcademico;
+import br.com.sistema.estagio.exception.RecursoNaoEncontradoException;
 import br.com.sistema.estagio.repository.PeriodoAcademicoRepository;
 import java.util.List;
-import java.util.NoSuchElementException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,7 +24,7 @@ public class PeriodoAcademicoService {
     @Transactional(readOnly = true)
     public PeriodoAcademico buscarPorId(Integer id) {
         return periodoAcademicoRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Período acadêmico não encontrado: " + id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Período acadêmico não encontrado: " + id));
     }
 
     @Transactional
@@ -41,6 +41,7 @@ public class PeriodoAcademicoService {
 
     @Transactional
     public void deletar(Integer id) {
+        buscarPorId(id);
         periodoAcademicoRepository.deleteById(id);
     }
 

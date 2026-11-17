@@ -1,9 +1,9 @@
 package br.com.sistema.estagio.service;
 
 import br.com.sistema.estagio.model.Instituicao;
+import br.com.sistema.estagio.exception.RecursoNaoEncontradoException;
 import br.com.sistema.estagio.repository.InstituicaoRepository;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +25,7 @@ public class InstituicaoService {
     @Transactional(readOnly = true)
     public Instituicao buscarPorId(Integer id) {
         return instituicaoRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Instituição não encontrada: " + id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Instituição não encontrada: " + id));
     }
 
     @Transactional
@@ -42,6 +42,7 @@ public class InstituicaoService {
 
     @Transactional
     public void deletar(Integer id) {
+        buscarPorId(id);
         instituicaoRepository.deleteById(id);
     }
 

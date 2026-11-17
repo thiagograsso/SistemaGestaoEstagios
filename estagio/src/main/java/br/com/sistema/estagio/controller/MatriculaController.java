@@ -20,10 +20,8 @@ public class MatriculaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Integer id) {
-        return matriculaService.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Matricula> buscarPorId(@PathVariable Integer id) {
+        return ResponseEntity.ok(matriculaService.buscarPorId(id));
     }
 
     @PostMapping

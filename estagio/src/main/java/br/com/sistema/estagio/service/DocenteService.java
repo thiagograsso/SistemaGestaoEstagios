@@ -1,13 +1,13 @@
 package br.com.sistema.estagio.service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.sistema.estagio.model.Docente;
+import br.com.sistema.estagio.exception.RecursoNaoEncontradoException;
 import br.com.sistema.estagio.repository.DocenteRepository;
 
 @Service
@@ -27,7 +27,7 @@ public class DocenteService {
     @Transactional(readOnly = true)
     public Docente buscarPorId(Integer id) {
         return docenteRepository.findById(id)
-                .orElseThrow(() -> new NoSuchElementException("Docente não encontrado: " + id));
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Docente não encontrado: " + id));
     }
 
     @Transactional
@@ -44,6 +44,7 @@ public class DocenteService {
 
     @Transactional
     public void deletar(Integer id) {
+        buscarPorId(id);
         docenteRepository.deleteById(id);
     }
 
