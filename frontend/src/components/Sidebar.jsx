@@ -1,6 +1,12 @@
 import './Sidebar.css'
 
-function Sidebar() {
+const itensMenu = [
+  { id: 'situacao', texto: '📊 Minha situação' },
+  { id: 'plano', texto: '📄 Plano inicial' },
+  { id: 'atividades', texto: '📋 Atividades' },
+]
+
+function Sidebar({ paginaAtual, aoNavegar }) {
   return (
     <aside className="sidebar">
       <div className="logo-area">
@@ -14,9 +20,20 @@ function Sidebar() {
       <span className="perfil">ESTUDANTE</span>
 
       <nav>
-        <a href="#" className="menu-item menu-item-ativo">📊 Minha situação</a>
-        <a href="#" className="menu-item">📄 Plano inicial</a>
-        <a href="#" className="menu-item">📋 Atividades</a>
+        {itensMenu.map((item) => (
+          <a
+            key={item.id}
+            href="#"
+            className={item.id === paginaAtual ? 'menu-item menu-item-ativo' : 'menu-item'}
+            aria-current={item.id === paginaAtual ? 'page' : undefined}
+            onClick={(e) => {
+              e.preventDefault()
+              aoNavegar(item.id)
+            }}
+          >
+            {item.texto}
+          </a>
+        ))}
       </nav>
 
       <a href="#" className="sair">Sair do sistema</a>

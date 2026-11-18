@@ -1,0 +1,92 @@
+.linha-form {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.linha-form .campo {
+  margin-bottom: 0;
+}
+
+.linha-form .botao {
+  padding: 12px 20px;
+}
+
+.campo-data {
+  width: 160px;
+}
+
+.campo-descricao {
+  flex: 1;
+}
+
+.campo-horas {
+  width: 96px;
+}
+
+.tabela-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.tabela-rolagem {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.tabela th {
+  padding: 16px 20px;
+  text-align: left;
+  font-size: 12px;
+  color: #475569;
+}
+
+.tabela td {
+  padding: 14px 20px;
+  border-top: 1px solid #e2e8f0;
+  vertical-align: middle;
+}
+
+.tabela .coluna-horas {
+  text-align: center;
+}
+
+.acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.botao-pequeno {
+  padding: 8px 14px;
+  font-size: 12px;
+}
+
+.bloqueado {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.selo-verde {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.selo-cinza {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.so-leitor {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
