@@ -1,8 +1,9 @@
 package br.com.sistema.estagio.controller;
 
-import br.com.sistema.estagio.model.Estagio;
+import br.com.sistema.estagio.dto.EstagioRequest;
+import br.com.sistema.estagio.dto.EstagioResponse;
 import br.com.sistema.estagio.service.EstagioService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -13,30 +14,36 @@ import java.util.List;
 @RequestMapping("/api/estagios")
 public class EstagioController {
 
-    @Autowired
-    private EstagioService estagioService;
+    private final EstagioService estagioService;
+
+    public EstagioController(EstagioService estagioService) {
+        this.estagioService = estagioService;
+    }
 
     @GetMapping
-    public ResponseEntity<List<Estagio>> listarTodos() {
-        List<Estagio> estagios = estagioService.listarTodos();
+    public ResponseEntity<List<EstagioResponse>> listarTodos() {
+        List<EstagioResponse> estagios = estagioService.listarTodos();
         return ResponseEntity.ok(estagios);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Estagio> buscarPorId(@PathVariable Integer id) {
-        Estagio estagio = estagioService.buscarPorId(id);
+    public ResponseEntity<EstagioResponse> buscarPorId(@PathVariable Integer id) {
+        EstagioResponse estagio = estagioService.buscarPorId(id);
         return ResponseEntity.ok(estagio);
     }
 
     @PostMapping
-    public ResponseEntity<Estagio> criar(@RequestBody Estagio estagio) {
-        Estagio novoEstagio = estagioService.criar(estagio);
+    public ResponseEntity<EstagioResponse> criar(@Valid @RequestBody EstagioRequest request) {
+        EstagioResponse novoEstagio = estagioService.criar(request);
         return ResponseEntity.ok(novoEstagio);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Estagio> atualizar(@PathVariable Integer id, @RequestBody Estagio estagio) {
-        Estagio estagioAtualizado = estagioService.atualizar(id, estagio);
+    public ResponseEntity<EstagioResponse> atualizar(
+            @PathVariable Integer id,
+            @Valid @RequestBody EstagioRequest request
+    ) {
+        EstagioResponse estagioAtualizado = estagioService.atualizar(id, request);
         return ResponseEntity.ok(estagioAtualizado);
     }
 
