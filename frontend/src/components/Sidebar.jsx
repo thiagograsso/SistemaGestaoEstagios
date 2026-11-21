@@ -1,12 +1,25 @@
 import './Sidebar.css'
 
-const itensMenu = [
-  { id: 'situacao', texto: '📊 Minha situação' },
-  { id: 'plano', texto: '📄 Plano inicial' },
-  { id: 'atividades', texto: '📋 Atividades' },
-]
+const menus = {
+  estudante: [
+    { id: 'situacao', texto: '📊 Minha situação' },
+    { id: 'plano', texto: '📄 Plano inicial' },
+    { id: 'atividades', texto: '📋 Atividades' },
+  ],
+  supervisor: [
+    { id: 'dashboard', texto: '📊 Visão geral' },
+    { id: 'analise', texto: '📋 Análise de registros' },
+  ],
+}
 
-function Sidebar({ paginaAtual, aoNavegar, aoSair }) {
+const nomePerfil = {
+  estudante: 'ESTUDANTE',
+  supervisor: 'SUPERVISOR/ORIENTADOR',
+}
+
+function Sidebar({ perfil, paginaAtual, aoNavegar, aoSair }) {
+  const itensMenu = menus[perfil]
+
   return (
     <aside className="sidebar">
       <div className="logo-area">
@@ -17,7 +30,7 @@ function Sidebar({ paginaAtual, aoNavegar, aoSair }) {
         </div>
       </div>
 
-      <span className="perfil">ESTUDANTE</span>
+      <span className="perfil">{nomePerfil[perfil]}</span>
 
       <nav>
         {itensMenu.map((item) => (

@@ -1,35 +1,12 @@
 import { useState } from 'react'
+import { estudanteLogado } from '../dados'
+import { formatarData, classeSelo } from '../utils'
 import './Atividades.css'
 
-const atividadesIniciais = [
-  { id: 1, data: '2026-09-02', descricao: 'Levantamento de requisitos com o PO', horas: 4, situacao: 'Aprovado' },
-  { id: 2, data: '2026-09-09', descricao: 'Wireframes das telas de login e dashboard', horas: 3, situacao: 'Aprovado' },
-  { id: 3, data: '2026-09-16', descricao: 'Protótipo navegável do fluxo de atividades', horas: 5, situacao: 'Submetido' },
-  {
-    id: 4,
-    data: '2026-09-23',
-    descricao: 'Revisão de acessibilidade',
-    horas: 2,
-    situacao: 'Devolvido',
-    justificativa: 'Detalhe quais critérios WCAG foram verificados.',
-  },
-]
-
-const classeSelo = {
-  Rascunho: 'selo-cinza',
-  Submetido: 'selo-azul',
-  Aprovado: 'selo-verde',
-  Devolvido: 'selo-vermelho',
-}
-
-function formatarData(iso) {
-  const [ano, mes, dia] = iso.split('-')
-  return `${dia}/${mes}/${ano}`
-}
-
-function Atividades() {
-  const [atividades, setAtividades] = useState(atividadesIniciais)
-
+function Atividades({ atividades, setAtividades }) {
+  const minhasAtividades = atividades.filter(
+    (a) => a.estudanteId === estudanteLogado.id
+  )
   const [data, setData] = useState('')
   const [descricao, setDescricao] = useState('')
   const [horas, setHoras] = useState('')
@@ -49,6 +26,7 @@ function Atividades() {
     if (editandoId === null) {
       const nova = {
         id: Date.now(),
+        estudanteId: estudanteLogado.id,
         data,
         descricao,
         horas: Number(horas),
@@ -155,7 +133,7 @@ function Atividades() {
               </tr>
             </thead>
             <tbody>
-              {atividades.map((a) => {
+              {minhasAtividades.map((a) => {
                 const podeEditar = a.situacao === 'Rascunho' || a.situacao === 'Devolvido'
                 const podeExcluir = a.situacao === 'Rascunho'
 
