@@ -1,48 +1,46 @@
-import br.com.sistema.estagio.model.RegistroAcademico;
-import br.com.sistema.estagio.service.RegistroAcademicoService;
+package br.com.sistema.estagio.controller;
+
+import br.com.sistema.estagio.model.Academico;
+import br.com.sistema.estagio.service.AcademicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-package br.com.sistema.estagio.controller;
-
-
-
 @RestController
-@RequestMapping("/api/registro-academico")
-public class RegistroAcademicoController {
+@RequestMapping("/api/academico")
+public class AcademicoController {
 
     @Autowired
-    private RegistroAcademicoService registroAcademicoService;
+    private AcademicoService academicoService;
 
     @GetMapping
-    public ResponseEntity<List<RegistroAcademico>> listarTodos() {
-        List<RegistroAcademico> registros = registroAcademicoService.listarTodos();
+    public ResponseEntity<List<Academico>> listarTodos() {
+        List<Academico> registros = academicoService.listarTodos();
         return ResponseEntity.ok(registros);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RegistroAcademico> buscarPorId(@PathVariable Long id) {
-        RegistroAcademico registro = registroAcademicoService.buscarPorId(id);
+    public ResponseEntity<Academico> buscarPorId(@PathVariable Integer id) {
+        Academico registro = academicoService.buscarPorId(id);
         return ResponseEntity.ok(registro);
     }
 
     @PostMapping
-    public ResponseEntity<RegistroAcademico> criar(@RequestBody RegistroAcademico registroAcademico) {
-        RegistroAcademico novoRegistro = registroAcademicoService.criar(registroAcademico);
+    public ResponseEntity<Academico> criar(@RequestBody Academico academico) {
+        Academico novoRegistro = academicoService.criar(academico);
         return ResponseEntity.ok(novoRegistro);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RegistroAcademico> atualizar(@PathVariable Long id, @RequestBody RegistroAcademico registroAcademico) {
-        RegistroAcademico registroAtualizado = registroAcademicoService.atualizar(id, registroAcademico);
+    public ResponseEntity<Academico> atualizar(@PathVariable Integer id, @RequestBody Academico academico) {
+        Academico registroAtualizado = academicoService.atualizar(id, academico);
         return ResponseEntity.ok(registroAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        registroAcademicoService.deletar(id);
+    public ResponseEntity<Void> deletar(@PathVariable Integer id) {
+        academicoService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 }
