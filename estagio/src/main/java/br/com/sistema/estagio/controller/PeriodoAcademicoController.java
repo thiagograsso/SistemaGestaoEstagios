@@ -1,4 +1,4 @@
-package br.com.sistema.estagio.controller;
+﻿package br.com.sistema.estagio.controller;
 
 import br.com.sistema.estagio.model.PeriodoAcademico;
 import br.com.sistema.estagio.service.PeriodoAcademicoService;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/periodos-academicos")
+@RequestMapping("/api/periodos")
 public class PeriodoAcademicoController {
 
     @Autowired
@@ -49,3 +49,4 @@ public class PeriodoAcademicoController {
         return ResponseEntity.noContent().build();
     }
 }
+

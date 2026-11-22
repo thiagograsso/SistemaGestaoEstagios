@@ -1,5 +1,6 @@
-package br.com.sistema.estagio.model;
+﻿package br.com.sistema.estagio.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,6 +38,7 @@ public class PeriodoAcademico {
     @Column(nullable = false, length = 20)
     private String status;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "periodo", fetch = FetchType.LAZY)
     private List<Estagio> estagios = new ArrayList<>();
 
