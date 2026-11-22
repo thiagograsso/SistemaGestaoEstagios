@@ -8,3 +8,12 @@ body {
   background: #f1f5fd;
   color: #0f172a;
 }
+
+.alerta-erro {
+  margin: 16px 0 0;
+  padding: 12px;
+  border-radius: 6px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 14px;
+}

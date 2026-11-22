@@ -1,8 +1,7 @@
 import { useState } from 'react'
-import { supervisorLogado, estudantes, periodos } from '../dados'
+import { supervisorLogado } from '../dados'
+import { iniciais, nomeDoUsuario } from '../utils'
 import './Dashboard.css'
-
-const periodosAtivos = periodos.filter((p) => p.ativo)
 
 function somarHoras(lista, situacao) {
   return lista
@@ -14,17 +13,37 @@ function contar(lista, situacao) {
   return lista.filter((a) => a.situacao === situacao).length
 }
 
-function Dashboard({ atividades }) {
-  const [periodoNome, setPeriodoNome] = useState(periodosAtivos[0].nome)
-  const periodo = periodosAtivos.find((p) => p.nome === periodoNome)
+function Dashboard({ perfil, atividades, periodos, usuarios, vinculos }) {
+  const periodosAtivos = periodos.filter((p) => p.ativo)
+  const [periodoNome, setPeriodoNome] = useState('')
 
-  const meusEstudantes = estudantes.filter(
-    (e) => e.supervisorId === supervisorLogado.id
+  const periodo =
+    periodosAtivos.find((p) => p.nome === periodoNome) ?? periodosAtivos[0]
+
+  const subtitulo =
+    perfil === 'coordenador'
+      ? 'Situação geral dos estudantes.'
+      : 'Seus estudantes vinculados.'
+
+  if (!periodo) {
+    return (
+      <div>
+        <h1 className="titulo">Dashboard</h1>
+        <p className="subtitulo">{subtitulo}</p>
+        <p className="vazio">Nenhum período ativo no momento.</p>
+      </div>
+    )
+  }
+
+  const vinculosDoPeriodo = vinculos.filter(
+    (v) =>
+      v.periodo === periodo.nome &&
+      (perfil === 'coordenador' || v.supervisorId === supervisorLogado.id)
   )
 
   const atividadesDoPeriodo = atividades.filter(
     (a) =>
-      meusEstudantes.some((e) => e.id === a.estudanteId) &&
+      vinculosDoPeriodo.some((v) => v.estudanteId === a.estudanteId) &&
       a.data >= periodo.inicio &&
       a.data <= periodo.fim
   )
@@ -32,13 +51,13 @@ function Dashboard({ atividades }) {
   return (
     <div>
       <h1 className="titulo">Dashboard</h1>
-      <p className="subtitulo">Seus estudantes vinculados.</p>
+      <p className="subtitulo">{subtitulo}</p>
 
       <label className="campo filtro-periodo" htmlFor="periodo-dashboard">
         Período
         <select
           id="periodo-dashboard"
-          value={periodoNome}
+          value={periodo.nome}
           onChange={(e) => setPeriodoNome(e.target.value)}
         >
           {periodosAtivos.map((p) => (
@@ -52,7 +71,7 @@ function Dashboard({ atividades }) {
       <div className="cards">
         <div className="card">
           <span className="card-rotulo">Estudantes</span>
-          <strong className="card-valor">{meusEstudantes.length}</strong>
+          <strong className="card-valor">{vinculosDoPeriodo.length}</strong>
         </div>
 
         <div className="card">
@@ -91,23 +110,33 @@ function Dashboard({ atividades }) {
               </tr>
             </thead>
             <tbody>
-              {meusEstudantes.map((e) => {
+              {vinculosDoPeriodo.map((v) => {
+                const estudante = usuarios.find((u) => u.id === v.estudanteId)
                 const dele = atividadesDoPeriodo.filter(
-                  (a) => a.estudanteId === e.id
+                  (a) => a.estudanteId === v.estudanteId
                 )
 
                 return (
-                  <tr key={e.id}>
+                  <tr key={v.id}>
                     <td>
                       <div className="estudante-celula">
-                        <span className="avatar-iniciais" aria-hidden="true">
-                          {e.iniciais}
+                        <span
+                          className={`avatar-iniciais avatar-cor-${estudante.id % 3}`}
+                          aria-hidden="true"
+                        >
+                          {iniciais(estudante.nome)}
                         </span>
-                        {e.nome}
+                        {estudante.nome}
                       </div>
                     </td>
-                    <td>{supervisorLogado.nome}</td>
-                    <td>{e.cargaPrevista}h previstas</td>
+                    <td>{nomeDoUsuario(usuarios, v.supervisorId)}</td>
+                    <td>
+                      {estudante.cargaPrevista ? (
+                        `${estudante.cargaPrevista}h previstas`
+                      ) : (
+                        <span className="selo selo-amarelo">Sem plano</span>
+                      )}
+                    </td>
                     <td>
                       <strong className="verde">{somarHoras(dele, 'Aprovado')}h</strong>
                     </td>

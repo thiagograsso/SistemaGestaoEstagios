@@ -1,8 +1,9 @@
-import { estudanteLogado, supervisorLogado } from '../dados'
+import { usuariosLogados } from '../dados'
+import { iniciais } from '../utils'
 import './Topbar.css'
 
 function Topbar({ perfil }) {
-  const usuario = perfil === 'supervisor' ? supervisorLogado : estudanteLogado
+  const usuario = usuariosLogados[perfil]
 
   return (
     <header className="topbar">
@@ -13,7 +14,7 @@ function Topbar({ perfil }) {
           <span className="usuario-nome">{usuario.nome}</span>
           <small className="usuario-status">Acesso ativo</small>
         </div>
-        <div className="avatar">{usuario.iniciais}</div>
+        <div className="avatar">{iniciais(usuario.nome)}</div>
       </div>
     </header>
   )

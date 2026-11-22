@@ -10,11 +10,19 @@ const menus = {
     { id: 'dashboard', texto: '📊 Visão geral' },
     { id: 'analise', texto: '📋 Análise de registros' },
   ],
+  coordenador: [
+    { id: 'dashboard', texto: '📊 Dashboard' },
+    { id: 'periodos', texto: '📅 Períodos' },
+    { id: 'pessoas', texto: '👥 Pessoas e vínculos' },
+    { id: 'registros', texto: '📋 Todos os registros' },
+    { id: 'rastreabilidade', texto: '🕘 Rastreabilidade' },
+  ],
 }
 
 const nomePerfil = {
   estudante: 'ESTUDANTE',
   supervisor: 'SUPERVISOR/ORIENTADOR',
+  coordenador: 'COORDENADOR',
 }
 
 function Sidebar({ perfil, paginaAtual, aoNavegar, aoSair }) {

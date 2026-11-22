@@ -3,7 +3,7 @@ import { estudanteLogado } from '../dados'
 import { formatarData, classeSelo } from '../utils'
 import './Atividades.css'
 
-function Atividades({ atividades, setAtividades }) {
+function Atividades({ atividades, setAtividades, aoRegistrar }) {
   const minhasAtividades = atividades.filter(
     (a) => a.estudanteId === estudanteLogado.id
   )
@@ -59,6 +59,9 @@ function Atividades({ atividades, setAtividades }) {
   }
 
   function submeter(id) {
+    const atividade = atividades.find((a) => a.id === id)
+    aoRegistrar(`Atividade "${atividade.descricao}" submetida`)
+
     setAtividades(
       atividades.map((a) =>
         a.id === id

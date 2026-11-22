@@ -1,19 +1,29 @@
-export const supervisorLogado = {
-  id: 1,
-  nome: 'Prof. Marcelo Momm',
-  iniciais: 'PM',
-}
-
-export const estudantes = [
-  { id: 1, nome: 'Ana Luiza', iniciais: 'AL', supervisorId: 1, cargaPrevista: 120 },
+export const usuariosIniciais = [
+  { id: 1, nome: 'Ana Luiza', email: 'ana.luiza@univille.br', tipo: 'estudante', cargaPrevista: 120 },
+  { id: 2, nome: 'Thiago Grasso', email: 'thiago.grasso@univille.br', tipo: 'estudante', cargaPrevista: null },
+  { id: 3, nome: 'Prof. Marcelo Momm', email: 'marcelo.momm@univille.br', tipo: 'supervisor' },
+  { id: 4, nome: 'Profa. Fernanda Franco', email: 'fernanda.franco@univille.br', tipo: 'supervisor' },
+  { id: 5, nome: 'Carlos Lanzer', email: 'carlos.lanzer@univille.br', tipo: 'coordenador' },
 ]
 
-export const estudanteLogado = estudantes[0]
+export const estudanteLogado = usuariosIniciais[0]
+export const supervisorLogado = usuariosIniciais[2]
+export const coordenadorLogado = usuariosIniciais[4]
 
-export const periodos = [
-  { nome: '2026/1', inicio: '2026-02-01', fim: '2026-07-31', ativo: false },
-  { nome: '2026/2', inicio: '2026-08-01', fim: '2026-12-31', ativo: true },
-  { nome: '2027/1', inicio: '2027-02-01', fim: '2027-07-31', ativo: true },
+export const usuariosLogados = {
+  estudante: estudanteLogado,
+  supervisor: supervisorLogado,
+  coordenador: coordenadorLogado,
+}
+
+export const periodosIniciais = [
+  { nome: '2026/2', inicio: '2026-08-01', fim: '2026-12-15', ativo: true },
+  { nome: '2026/1', inicio: '2026-02-01', fim: '2026-07-15', ativo: false },
+]
+
+export const vinculosIniciais = [
+  { id: 1, estudanteId: 1, supervisorId: 3, periodo: '2026/2' },
+  { id: 2, estudanteId: 2, supervisorId: 4, periodo: '2026/2' },
 ]
 
 export const atividadesIniciais = [
@@ -29,4 +39,10 @@ export const atividadesIniciais = [
     situacao: 'Devolvido',
     justificativa: 'Detalhe quais critérios WCAG foram verificados.',
   },
+  { id: 5, estudanteId: 2, data: '2026-09-10', descricao: 'Configuração do Spring Security', horas: 6, situacao: 'Submetido' },
+  { id: 6, estudanteId: 2, data: '2026-09-18', descricao: 'Testes de autenticação', horas: 3, situacao: 'Rascunho' },
+]
+
+export const auditoriaInicial = [
+  { id: 1, quando: '02/09/2026, 14:00:00', usuario: 'Sistema', acao: 'Dados de demonstração carregados' },
 ]

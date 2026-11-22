@@ -55,7 +55,13 @@ function Login({ aoEntrar }) {
           >
             Entrar como supervisor
           </button>
-          <button type="button" className="login-botao">Entrar como coordenador</button>
+          <button
+            type="button"
+            className="login-botao"
+            onClick={() => aoEntrar('coordenador')}
+          >
+            Entrar como coordenador
+          </button>
         </form>
       </section>
     </div>

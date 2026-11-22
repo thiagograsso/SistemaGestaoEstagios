@@ -1,18 +1,18 @@
 import { useState } from 'react'
-import { supervisorLogado, estudantes } from '../dados'
-import { formatarData, classeSelo } from '../utils'
+import { supervisorLogado } from '../dados'
+import { formatarData, classeSelo, nomeDoUsuario } from '../utils'
 import './AnaliseRegistros.css'
 
-function AnaliseRegistros({ atividades, setAtividades }) {
+function AnaliseRegistros({ atividades, setAtividades, usuarios, vinculos, aoRegistrar }) {
   const [filtro, setFiltro] = useState('aguardando')
 
-  const meusEstudantes = estudantes.filter(
-    (e) => e.supervisorId === supervisorLogado.id
-  )
+  const idsDosMeusEstudantes = vinculos
+    .filter((v) => v.supervisorId === supervisorLogado.id)
+    .map((v) => v.estudanteId)
 
   const registros = atividades.filter(
     (a) =>
-      meusEstudantes.some((e) => e.id === a.estudanteId) &&
+      idsDosMeusEstudantes.includes(a.estudanteId) &&
       a.situacao !== 'Rascunho'
   )
 
@@ -21,16 +21,16 @@ function AnaliseRegistros({ atividades, setAtividades }) {
       ? registros.filter((a) => a.situacao === 'Submetido')
       : registros
 
-  function nomeDoEstudante(id) {
-    return meusEstudantes.find((e) => e.id === id).nome
-  }
-
-  function mudarSituacao(id, novaSituacao) {
+  function mudarSituacao(atividade, novaSituacao) {
     setAtividades(
       atividades.map((a) =>
-        a.id === id ? { ...a, situacao: novaSituacao } : a
+        a.id === atividade.id ? { ...a, situacao: novaSituacao } : a
       )
     )
+
+    const verbo = novaSituacao === 'Aprovado' ? 'aprovada' : 'devolvida'
+    const estudante = nomeDoUsuario(usuarios, atividade.estudanteId)
+    aoRegistrar(`Atividade "${atividade.descricao}" de ${estudante} ${verbo}`)
   }
 
   return (
@@ -74,7 +74,7 @@ function AnaliseRegistros({ atividades, setAtividades }) {
             <li key={a.id} className="card registro">
               <div>
                 <span className="registro-info">
-                  {nomeDoEstudante(a.estudanteId)} · {formatarData(a.data)} · {a.horas}h
+                  {nomeDoUsuario(usuarios, a.estudanteId)} · {formatarData(a.data)} · {a.horas}h
                 </span>
                 <strong className="registro-titulo">{a.descricao}</strong>
 
@@ -84,7 +84,7 @@ function AnaliseRegistros({ atividades, setAtividades }) {
                       type="button"
                       className="botao botao-pequeno"
                       aria-label={`Aprovar ${a.descricao}`}
-                      onClick={() => mudarSituacao(a.id, 'Aprovado')}
+                      onClick={() => mudarSituacao(a, 'Aprovado')}
                     >
                       Aprovar
                     </button>
@@ -92,7 +92,7 @@ function AnaliseRegistros({ atividades, setAtividades }) {
                       type="button"
                       className="botao botao-pequeno"
                       aria-label={`Devolver ${a.descricao}`}
-                      onClick={() => mudarSituacao(a.id, 'Devolvido')}
+                      onClick={() => mudarSituacao(a, 'Devolvido')}
                     >
                       Devolver
                     </button>
