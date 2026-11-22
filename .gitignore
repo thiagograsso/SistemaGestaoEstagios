@@ -1,0 +1,16 @@
+﻿# Java / Maven
+estagio/target/
+estagio/data/
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+
+# IDE
+.idea/
+.vscode/
+
+# Logs and OS files
+*.log
+.DS_Store
+Thumbs.db
