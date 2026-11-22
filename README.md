@@ -1,135 +1,356 @@
-# Sistema de Gestão de Estágios e Atividades Acadêmicas
+﻿# Sistema de Gestão de Estágios e Atividades Acadêmicas
 
-## 📋 Informações do Projeto
+Aplicação web para planejar estágios, registrar atividades acadêmicas, controlar carga horária e aprovar ou devolver registros pelos perfis de estudante, supervisor/orientador e coordenador.
 
-- **Grupo Nº:** 02
-- **Disciplina:** Fábrica de Software I
-- **Curso:** Engenharia de Software
-- **Universidade:** Univille
+## Índice
 
----
+- [Visão geral](#visão-geral)
+- [Arquitetura](#arquitetura)
+- [Tecnologias](#tecnologias)
+- [Pré-requisitos](#pré-requisitos)
+- [Como executar no Windows](#como-executar-no-windows)
+- [Como executar no Linux ou macOS](#como-executar-no-linux-ou-macos)
+- [Usuários de demonstração](#usuários-de-demonstração)
+- [Estrutura do projeto](#estrutura-do-projeto)
+- [Banco de dados](#banco-de-dados)
+- [Endpoints principais](#endpoints-principais)
+- [Build e validação](#build-e-validação)
+- [Limitações atuais](#limitações-atuais)
+- [Solução de problemas](#solução-de-problemas)
 
-## 👥 Integrantes
+## Visão geral
+
+O sistema contempla os seguintes fluxos:
+
+- Estudante: consultar situação, preencher plano inicial e criar, editar, excluir e submeter atividades.
+- Supervisor/orientador: visualizar o dashboard e analisar registros submetidos.
+- Coordenador: gerenciar períodos, pessoas, vínculos, registros e rastreabilidade.
+- Login por e-mail e senha com identificação do perfil.
+- Persistência das informações em banco H2 durante o funcionamento da aplicação.
+
+## Arquitetura
+
+```text
+Navegador
+   |
+   v
+React + Vite  (porta 5173)
+   |
+   | HTTP/JSON
+   v
+Spring Boot REST (porta 8080)
+   |
+   v
+Spring Data JPA / Hibernate
+   |
+   v
+Banco H2 em arquivo
+```
+
+O front-end está em `frontend/` e o back-end em `estagio/`. As APIs REST são consumidas pelo navegador, enquanto o H2 é usado pela camada JPA.
+
+## Tecnologias
+
+### Back-end
+
+- Java 21
+- Spring Boot 4.1.1
+- Spring Web MVC
+- Spring Data JPA
+- Hibernate
+- H2 Database
+- Maven Wrapper
+
+### Front-end
+
+- React 19
+- Vite 8
+- JavaScript ES Modules
+- CSS
+
+## Pré-requisitos
+
+Instale antes de iniciar:
+
+1. **Java JDK 21**.
+2. **Node.js 20.19+ ou 22.12+**.
+3. **npm** compatível com a versão do Node.
+4. **Git**.
+
+Verifique as ferramentas:
+
+```bash
+java -version
+node --version
+npm --version
+git --version
+```
+
+> O projeto inclui o Maven Wrapper. Não é necessário instalar o Maven separadamente.
+
+## Como executar no Windows
+
+### 1. Clonar o projeto
+
+```powershell
+ git clone https://github.com/thiagograsso/SistemaGestaoEstagios.git
+ cd SistemaGestaoEstagios
+```
+
+### 2. Iniciar o back-end
+
+Em um terminal PowerShell:
+
+```powershell
+cd estagio
+.\mvnw.cmd spring-boot:run
+```
+
+Aguarde até aparecer:
+
+```text
+Started EstagioApplication
+Tomcat started on port 8080
+```
+
+O back-end estará em:
+
+- API: <http://localhost:8080>
+- H2 console: <http://localhost:8080/h2-console>
+
+### 3. Iniciar o front-end
+
+Abra um segundo terminal na raiz do projeto:
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Acesse:
+
+- Aplicação: <http://localhost:5173>
+
+### 4. Alternativa para o front-end já instalado
+
+Se as dependências já estiverem instaladas:
+
+```powershell
+cd frontend
+npm run dev
+```
+
+## Como executar no Linux ou macOS
+
+### 1. Clonar e entrar no projeto
+
+```bash
+git clone https://github.com/thiagograsso/SistemaGestaoEstagios.git
+cd SistemaGestaoEstagios
+```
+
+### 2. Executar o back-end
+
+```bash
+cd estagio
+chmod +x mvnw
+./mvnw spring-boot:run
+```
+
+### 3. Executar o front-end
+
+Em outro terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Acesse <http://localhost:5173>.
+
+## Usuários de demonstração
+
+Estes usuários são criados automaticamente pelo `DataSeeder` na primeira inicialização:
+
+| Perfil | E-mail | Senha |
+|---|---|---|
+| Estudante | `ana.luiza@univille.br` | `estudante123` |
+| Supervisor/Orientador | `marcelo.momm@univille.br` | `supervisor123` |
+| Coordenador | `carlos.lanzer@univille.br` | `coordenador123` |
+
+Os dados são armazenados no banco H2 local. Alterações permanecem enquanto o arquivo `estagio/data/gestao-estagios.mv.db` existir.
+
+## Estrutura do projeto
+
+```text
+SistemaGestaoEstagios/
+├── estagio/
+│   ├── src/main/java/br/com/sistema/estagio/
+│   │   ├── config/       # Seed e configuração CORS
+│   │   ├── controller/   # Endpoints REST
+│   │   ├── model/        # Entidades JPA
+│   │   ├── repository/   # Repositórios Spring Data
+│   │   └── service/      # Regras de negócio
+│   ├── src/main/resources/
+│   │   ├── application.properties
+│   │   ├── schema.sql
+│   │   └── data.sql
+│   └── pom.xml
+└── frontend/
+    ├── src/
+    │   ├── components/   # Barra lateral e barra superior
+    │   ├── pages/        # Telas por perfil
+    │   ├── api.js        # Comunicação com a API
+    │   └── App.jsx       # Navegação e estado principal
+    └── package.json
+```
+
+## Banco de dados
+
+O projeto usa H2 em arquivo pela configuração padrão:
+
+```properties
+spring.datasource.url=jdbc:h2:file:./data/gestao-estagios;MODE=MySQL;DATABASE_TO_LOWER=TRUE
+spring.jpa.hibernate.ddl-auto=update
+spring.sql.init.mode=never
+```
+
+Isso permite executar o projeto sem instalar MySQL. Os arquivos do banco ficam dentro de `estagio/data/`.
+
+Os arquivos `schema.sql` e `data.sql` existem como referência do modelo MySQL, mas não são executados pela configuração H2 atual.
+
+Para reiniciar os dados do banco H2, pare o back-end e apague a pasta:
+
+```powershell
+Remove-Item -Recurse -Force estagio\data
+```
+
+No Linux ou macOS:
+
+```bash
+rm -rf estagio/data
+```
+
+Na próxima inicialização, o `DataSeeder` recria os usuários e períodos iniciais.
+
+## Endpoints principais
+
+| Método | Endpoint | Descrição |
+|---|---|---|
+| POST | `/api/auth/login` | Valida e-mail e senha |
+| GET | `/api/periodos` | Lista períodos acadêmicos |
+| POST | `/api/periodos` | Cria período acadêmico |
+| PUT | `/api/periodos/{id}` | Atualiza período acadêmico |
+| GET | `/api/docentes` | Lista docentes |
+| GET | `/api/academicos` | Lista acadêmicos |
+| GET | `/api/estagios` | Lista estágios |
+| GET | `/api/registro-atividades` | Lista registros de atividades |
+| POST | `/api/registro-atividades` | Cria registro de atividade |
+| PUT | `/api/registro-atividades/{id}` | Atualiza registro de atividade |
+
+Exemplo de login:
+
+```json
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ana.luiza@univille.br",
+  "senha": "estudante123"
+}
+```
+
+## Build e validação
+
+### Back-end
+
+```bash
+cd estagio
+./mvnw compile
+```
+
+No Windows, use `mvnw.cmd`:
+
+```powershell
+cd estagio
+.\mvnw.cmd compile
+```
+
+### Front-end
+
+```bash
+cd frontend
+npm run build
+```
+
+O build de produção será criado em `frontend/dist/`.
+
+### Executar os testes
+
+```bash
+cd estagio
+./mvnw test
+```
+
+## Limitações atuais
+
+- A tela ainda contém parte dos dados demonstrativos no front-end.
+- Algumas telas funcionam no estado local da navegação e ainda não persistem todas as entidades pelo REST.
+- O login atual usa consulta direta ao usuário e não emite token JWT/sessão segura.
+- Senhas demonstrativas são armazenadas como texto no banco atual e devem ser substituídas por hash para uso real.
+- H2 é adequado para desenvolvimento e demonstração; MySQL pode ser configurado para ambiente de produção.
+
+## Solução de problemas
+
+### Porta 8080 já está em uso
+
+Identifique e encerre o processo antigo que está usando a porta:
+
+```powershell
+Get-NetTCPConnection -LocalPort 8080 -State Listen
+Stop-Process -Id <PID> -Force
+```
+
+### Porta 5173 já está em uso
+
+O Vite mostrará automaticamente outra porta disponível. Use o endereço informado no terminal.
+
+### Erro de Node.js no Vite
+
+Atualize para Node.js 20.19+ ou 22.12+. Depois execute:
+
+```bash
+cd frontend
+rm -rf node_modules package-lock.json
+npm install
+npm run dev
+```
+
+No Windows:
+
+```powershell
+cd frontend
+Remove-Item -Recurse -Force node_modules
+Remove-Item package-lock.json
+npm install
+npm run dev
+```
+
+### Back-end não encontra o banco
+
+Certifique-se de executar o Maven a partir da pasta `estagio`. A URL H2 usa um caminho relativo a essa pasta.
+
+### Alterações não aparecem no navegador
+
+- Atualize a página.
+- Verifique se o back-end está ativo na porta 8080.
+- Verifique o console do navegador para erros CORS ou de rede.
+
+## Integrantes
 
 - Ana Luiza Dias da Rocha
 - Carlos Eduardo Lanser
 - Marcelo Felipe Momm
 - Thiago Grasso
-
----
-
-## 🎯 1. Visão Geral do Projeto
-
-### 1.1 Contexto
-Cursos que acompanham estágios, práticas ou atividades acadêmicas precisam controlar rigorosamente estudantes, responsáveis, períodos, carga horária, registros de atividades e aprovações. Atualmente, quando esse acompanhamento ocorre por meio de documentos soltos e trocas de mensagens, a coordenação enfrenta grande dificuldade para identificar pendências e acompanhar a evolução individual de cada estudante.
-
-### 1.2 Problema a ser Resolvido
-O objetivo deste projeto é construir um sistema web para registrar e acompanhar atividades acadêmicas supervisionadas, concentrando o plano de atividades, os registros de execução, o controle de horas e as validações em um único fluxo integrado e transparente.
-
----
-
-## 🎭 2. Atores e Perfis de Usuário
-
-- **Estudante:** Responsável por cadastrar e acompanhar sua atividade, lançar registros de execução e submeter etapas para avaliação.
-- **Supervisor / Orientador:** Encarregado de analisar os registros enviados, aprovar as entregas ou solicitar ajustes/correções.
-- **Coordenador:** Visão macro de todos os estudantes, responsável por gerenciar os períodos letivos e visualizar pendências gerais do sistema.
-
----
-
-## 🔄 3. Fluxo Principal da Aplicação
-
-- **Planejamento:** O estudante cadastra os dados da sua atividade acadêmica/estágio.
-- **Execução:** O estudante realiza as atividades e registra suas horas e descrições no sistema periodicamente.
-- **Análise:** O supervisor/orientador revisa os lançamentos e realiza a aprovação ou solicita revisões.
-- **Validação Final:** A coordenação acompanha o status global e homologa a conclusão da carga horária.
-
----
-
-## 🗄️ 4. Modelagem de Dados (Diagrama DER)
-
-O diagrama entidade-relacionamento estruturado para suportar o banco de dados da aplicação:
-
-
-[DER.pdf](https://github.com/user-attachments/files/33793076/DER.pdf)
-<img width="1536" height="1024" alt="DiagramaDER" src="https://github.com/user-attachments/assets/cb0a2c60-66fb-4e53-a699-15e7fc7abaa8" />
-
-
----
-
-## 5. Protótipo e Briefing
-### Tela 1 - Minha situação (Estudante)
-- **Campo "Horas validadas":** Total de horas correspondentes às atividades do estudante que já foram aprovadas;
-- **Campo "Em análise":** Total de horas correspondentes às atividades que estão aguardando aprovação;
-- **Campo "Devolvidas":** Total de atividades do estudante que foram devolvidas;
-- **Campo "Rascunhos":** Total de atividades do estudante que ainda não foram enviadas para análise;
-- **Campo "Progresso em relação à carga prevista no plano":** Total de horas validadas em comparação às horas definidas
-
-### Tela 2 - Plano inicial (Estudante)
-- **Campo "Período":** Será disponível para seleção, apenas os períodos que forem cadastrados pelo supervisor/orientador
-- **Campo "Instituição / Local":** Campo de texto, referente ao local de onde será cadastrado o plano inicial
-- **Campo "Objetivo":** Campo de texto, referente ao objetivo do projeto
-- **Campo "Carga prevista":** Carga prevista do projeto, em horas
-- Ao salvar plano, será exibido um alerta confirmando que o plano foi salvo
-
-### Tela 3 - Dashboard (Supervisor/Orientador)
-- **Campo "Período":** Será disponível para seleção os períodos ativos
-- **Campo "Estudantes":** Total de estudantes vinculados ao supervisor/coordenador logado
-- **Campo "Horas validadas":** Total de horas correspondentes às atividades do estudante que já foram aprovadas, que correspondem ao período filtrado
-- **Campo "Horas em análise":** Total de horas correspondentes às atividades que estão aguardando aprovação, que correspondem ao período filtrado
-- **Campo "Devoluções abertas":** Total de atividades devolvidas pelo supervisor/orientador, que correspondem ao período filtrado
-- Listagem de estudantes que são vinculados ao supervisor/coordenador logado. Contém os campos Estudante, Supervisor, Plano, Validadas, Em análise, Devolvidas
-
-### Tela 4 - Análise de registros (Supervisor/Orientador)
-- **Botão "Aguardando análise":** Filtra pelas atividades que estão aguardando análise
-- **Botão "Todos":** Retorna todas as atividades vinculadas ao supervisor/orientador logado
-- **Card das atividades:" Nome do estudante, data e horas correspondentes acima. Em destaque, o título da atividade com duas opções: Aprovar e Devolver. Ao aprovar, atividade muda de situação para Aprovado, e atividade é validada. Ao devolver, a atividade muda de situação para devolvido e atividade é retornada para o estudante realizar as devidas alterações.
-
-### Tela 5 - Dashboard (Coordenador)
-- **Campo "Período":** Será disponível para seleção os períodos ativos
-- **Campo "Estudantes":** Total de estudantes, que correspondem ao período filtrado
-- **Campo "Horas validadas":** Total de horas correspondentes às atividades do estudante que já foram aprovadas, que correspondem ao período filtrado
-- **Campo "Horas em análise":** Total de horas correspondentes às atividades que estão aguardando aprovação, que correspondem ao período filtrado
-- **Campo "Devoluções abertas":** Total de atividades devolvidas pelo supervisor/orientador, que correspondem ao período filtrado
-- Listagem de estudantes. Contém os campos Estudante, Supervisor, Plano, Validadas, Em análise, Devolvidas
-
-### Tela 6 - Pessoas e vínculos (Coordenador)
-- **Campo "Nome" (Novo usuário):** Nome do usuário
-- **E-mail (Novo usuário):** E-mail do usuário em formato válido
-- **Seleção de tipo de usuário (Novo usuário):** Opções Estudante, Supervisor/Orientador, Coordenador
-- **Campo "Estudante" (Novo vínculo):** Usuários cadastrados do tipo Estudante
-- **Campo "Supervisor" (Novo vínculo):** Usuários cadastrados do tipo Supervisor/Orientador
-- **Campo "Período" (Novo vínculo):** Períodos cadastrados no sistema pelo Supervisor/Orientador
-- Listagem de pessoas e vínculos, contendo os campos Estudante, Supervisor e Período. Um registro só é listado ao realizar o vínculo.
-
-### Tela 7 - Todos os registros (Coordenador)
-- Listagem de todos os registros de atividades, contendo os campos Estudante, Data, Descrição, Horas e Situação. Acima, há um botão sendo possível filtrar por cada situação (Rascunho, Submetido, Aprovado e Devolvido)
-
-### Tela 8 - Rastreabilidade (Coordenador)
-- Listagem de ações relevantes no sistema, contendo os campos Quando (Data e Horário), Usuário e Ação.
-
-### Todas as telas
-- **Botão de "Sair do sistema":** Responsável por deslogar do sistema, e voltar à página de login
-
-[protótipo](https://www.figma.com/proto/Wi3HheDZJ1sH4WglWv5en7/Untitled?node-id=90-193&t=QR4alUHoweBqqunQ-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=97%3A242&show-proto-sidebar=1)
-
----
-
-## 🛠️ 6. Tecnologias e Estrutura Atual
-
-O projeto utiliza tecnologias modernas voltadas para aplicações web robustas, estruturadas com padrões corporativos.
-
-- **Linguagem:** Java (Versão padrão atual LTS)
-- **Framework Back-end:** Spring Boot
-- **Gerenciamento de Build e Dependências:** Gradle (`build.gradle`, `settings.gradle`) *(compatível com o fluxo Maven/Gradle exigido)*
-- **Front-end:** React
-- **Banco de Dados:** MySQL
-
----
-
-## 🚀 7. Próximos Passos (Roadmap)
-
-- [x] Definição da modelagem de dados inicial (Diagrama DER).
-- [x] Configuração inicial da estrutura do repositório (Java/Spring Boot, Gradle e arquivos de controle).
-- [ ] Desenvolvimento dos wireframes / protótipo de tela.
-- [ ] Implementação do MVP (Foco no fluxo de cadastro e lançamentos do estudante).
-- [ ] Implementação dos módulos de validação do orientador e coordenação.
