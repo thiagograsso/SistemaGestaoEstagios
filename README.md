@@ -354,3 +354,6 @@ Certifique-se de executar o Maven a partir da pasta `estagio`. A URL H2 usa um c
 - Carlos Eduardo Lanser
 - Marcelo Felipe Momm
 - Thiago Grasso
+- Fernanda Gomes Franco
+
+
