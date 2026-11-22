@@ -1,0 +1,58 @@
+.filtros {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.botao.botao-filtro {
+  padding: 10px 16px;
+  font-size: 13px;
+  border: 1px solid #1d4ed8;
+}
+
+.botao.botao-filtro:not(.filtro-ativo) {
+  background: white;
+  color: #1d4ed8;
+}
+
+.botao.botao-filtro:not(.filtro-ativo):hover {
+  background: #eff6ff;
+}
+
+.lista-registros {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card.registro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.registro-info {
+  display: block;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.registro-titulo {
+  display: block;
+  margin-top: 6px;
+  font-size: 16px;
+}
+
+.registro-acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.vazio {
+  font-size: 14px;
+  color: #64748b;
+}

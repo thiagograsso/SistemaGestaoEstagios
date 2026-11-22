@@ -1,16 +1,20 @@
+import { usuariosLogados } from '../dados'
+import { iniciais } from '../utils'
 import './Topbar.css'
 
-function Topbar() {
+function Topbar({ perfil }) {
+  const usuario = usuariosLogados[perfil]
+
   return (
     <header className="topbar">
       <strong>UNIVILLE — Campus Central</strong>
 
       <div className="usuario">
         <div className="usuario-texto">
-          <span className="usuario-nome">Ana Luiza</span>
+          <span className="usuario-nome">{usuario.nome}</span>
           <small className="usuario-status">Acesso ativo</small>
         </div>
-        <div className="avatar">AL</div>
+        <div className="avatar">{iniciais(usuario.nome)}</div>
       </div>
     </header>
   )

@@ -3,7 +3,7 @@ import './Login.css'
 function Login({ aoEntrar }) {
   function entrarComoEstudante(e) {
     e.preventDefault()
-    aoEntrar()
+    aoEntrar('estudante')
   }
 
   return (
@@ -48,8 +48,20 @@ function Login({ aoEntrar }) {
           </label>
 
           <button type="submit" className="login-botao">Entrar como estudante</button>
-          <button type="button" className="login-botao">Entrar como supervisor</button>
-          <button type="button" className="login-botao">Entrar como coordenador</button>
+          <button
+            type="button"
+            className="login-botao"
+            onClick={() => aoEntrar('supervisor')}
+          >
+            Entrar como supervisor
+          </button>
+          <button
+            type="button"
+            className="login-botao"
+            onClick={() => aoEntrar('coordenador')}
+          >
+            Entrar como coordenador
+          </button>
         </form>
       </section>
     </div>

@@ -1,0 +1,22 @@
+.duas-colunas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.card.formulario-coluna .campo {
+  margin-bottom: 12px;
+}
+
+.card.formulario-coluna .campo input,
+.card.formulario-coluna .campo select {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .duas-colunas {
+    grid-template-columns: 1fr;
+  }
+}
